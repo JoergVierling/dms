@@ -1,0 +1,79 @@
+version: '3.7'
+services:
+  consul-server:
+    image: hashicorp/consul:1.9.6
+    container_name: consul-server
+    hostname: consul-server
+    restart: always
+    volumes:
+     - ./consul-server/server.json:/consul/config/server.json:ro
+    networks:
+      dmsTimeDemoNetwork:
+        ipv4_address: 10.5.0.2
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+      - "53:53"
+    dns:
+      - 10.5.0.2 #Consul Server DNS name
+    command: "agent"
+  web:
+    build: ./angular-time-app
+    depends_on:
+    - consul-server
+    ports:
+      - 80:80
+    volumes:
+       - ./angular-time-app/dist/angular-time-app/:/usr/share/nginx/html/
+    networks: 
+      dmsTimeDemoNetwork:
+        ipv4_address: 10.5.0.3       
+    dns:
+      - 10.5.0.2 #Consul Server DNS name
+  gateway:
+    build: ./gateway
+    ports:
+    - '81:81'
+    volumes:
+      - ./gateway/config/:/etc/nginx/conf.d/
+
+    
+    depends_on:
+    - api
+    - api-2
+    - consul-server
+    networks: 
+      dmsTimeDemoNetwork:
+        ipv4_address: 10.5.0.4
+    dns:
+      - 10.5.0.2 #Consul Server DNS name
+  api:
+    build: ./node-api
+    depends_on:
+    - consul-server
+    networks: 
+      dmsTimeDemoNetwork:
+        ipv4_address: 10.5.0.5
+    dns:
+      - 10.5.0.2 #Consul Server DNS name
+  api-2:
+    build: ./node-api-2
+    depends_on:
+    - consul-server
+    networks: 
+      dmsTimeDemoNetwork:
+        ipv4_address: 10.5.0.6       
+    dns:
+      - 10.5.0.2 #Consul Server DNS name
+ 
+
+networks:
+  dmsTimeDemoNetwork:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
+
+# /usr/local/bin/consul agent -data-dir=/opt/consul-agent/data -config-dir=/opt/consul-agent/config -config-file=/opt/consul-agent/config/client.json

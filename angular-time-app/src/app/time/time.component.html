@@ -1,0 +1,9 @@
+<div class="time-container">
+  <h1>{{ currentTime }}</h1>
+</div>
+
+
+
+<footer  [ngClass]="{ 'green-bg': isApiAvailable , 'red-bg': !isApiAvailable  }">
+  <p>{{ isApiAvailable ? 'API erreichbar' : 'API nicht erreichbar' }}</p>
+</footer>
