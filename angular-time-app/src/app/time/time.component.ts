@@ -8,8 +8,9 @@ import { environment } from '../../enviroment/environment'; // Importieren Sie d
   styleUrls: ['./time.component.scss']
 })
 export class TimeComponent implements OnInit {
-  currentTime: string = '';
+  public currentTime: string = '';
   isApiAvailable: boolean = false;
+  public currentNode: string='';
 
   constructor(private http: HttpClient) {}
 
@@ -21,6 +22,7 @@ export class TimeComponent implements OnInit {
     this.http.get<any>('http://localhost:81/time').subscribe(
       (response: any) => {
         this.currentTime = response.time;
+        this.currentNode = response.node;
         this.isApiAvailable = true;
         setTimeout(() => {
           this.fetchTime();

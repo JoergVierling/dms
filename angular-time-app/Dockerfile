@@ -20,6 +20,9 @@ COPY devops/client.json /opt/consul-agent/config/
 
 VOLUME /usr/share/nginx/html
 
+WORKDIR /app
+COPY ./devops/start.sh ./
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

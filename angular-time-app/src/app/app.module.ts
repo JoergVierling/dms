@@ -7,18 +7,22 @@ import { AppComponent } from './app.component';
 import { TimeComponent } from './time/time.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { DiscoveryComponent } from './discovery/discovery.component';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TimeComponent
+    TimeComponent,
+    DiscoveryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxJsonViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

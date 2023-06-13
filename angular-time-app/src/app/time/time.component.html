@@ -1,7 +1,14 @@
 <div class="time-container">
-  <h1>{{ currentTime }}</h1>
+  <div><h1>{{ currentTime }}</h1></div>
 </div>
+<div class="time-container"><h2>From: {{currentNode}}</h2></div>
 
+<ul>
+  <li><a href="http://localhost:81/time" target="_blank">Api</a> </li>
+  <li><a href="http://localhost:8500" target="_blank">Consul</a> </li>
+  <li><a href="http://localhost:8500/v1/catalog/service/api" target="_blank">Discovery Api</a> </li>
+  <li><a href="http://localhost:9000/#!/2/docker/containers" target="_blank">Portainer</a> </li>
+</ul>
 
 
 <footer  [ngClass]="{ 'green-bg': isApiAvailable , 'red-bg': !isApiAvailable  }">
