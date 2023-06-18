@@ -14,7 +14,7 @@ services:
       - "8500:8500"
       - "8600:8600/tcp"
       - "8600:8600/udp"
-      - "53:53"
+      #- "53:53"
     dns:
       - 10.5.0.2 #Consul Server DNS name
     command: "agent"
@@ -75,5 +75,4 @@ networks:
       config:
         - subnet: 10.5.0.0/16
 
-
-# /usr/local/bin/consul agent -data-dir=/opt/consul-agent/data -config-dir=/opt/consul-agent/config -config-file=/opt/consul-agent/config/client.json
+#  /usr/local/bin/consul agent -data-dir=/opt/consul-agent/data -config-dir=/opt/consul-agent/config -config-file=/opt/consul-agent/config/client.json

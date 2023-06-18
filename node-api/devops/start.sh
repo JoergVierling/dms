@@ -1,0 +1,1 @@
+/usr/local/bin/consul agent -data-dir=/opt/consul-agent/data -config-dir=/opt/consul-agent/config -config-file=/opt/consul-agent/config/client.json

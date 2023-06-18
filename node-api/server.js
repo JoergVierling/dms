@@ -5,8 +5,9 @@ const app = express();
 app.use(cors());
 
 app.get('/time', (req, res) => {
-  const currentTime = new Date().toLocaleTimeString();
-  res.json({ time: currentTime });
+  const currentTime = new Date().toTimeString();
+  res.json({ time: currentTime,
+    node:"node-api-1" });
 });
 
 app.get('/', (req, res) => {

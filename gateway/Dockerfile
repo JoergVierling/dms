@@ -27,4 +27,7 @@ RUN mkdir /opt/consul-agent
 RUN mkdir /opt/consul-agent/config
 RUN mkdir /opt/consul-agent/data
 
-COPY client.json /opt/consul-agent/config/
+COPY devops/client.json /opt/consul-agent/config/
+
+WORKDIR /app
+COPY ./devops/start.sh ./

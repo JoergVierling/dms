@@ -19,6 +19,7 @@ COPY ./devops/client.json /opt/consul-agent/config/
 
 WORKDIR /app
 COPY package*.json ./
+COPY ./devops/start.sh ./
 
 RUN npm install
 
